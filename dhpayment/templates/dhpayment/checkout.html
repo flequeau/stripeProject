@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+  <head>
+    <title>Paiement en ligne des honoraires d'anesthésie</title>
+  </head>
+
+{% block content %}
+    <form action="{% url 'create-checkout-session' %}" method="POST">
+        {% csrf_token %}
+      <button type="submit">Checkout</button>
+    </form>
+{% endblock %}

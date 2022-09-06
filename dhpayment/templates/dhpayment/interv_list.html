@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Interventions</h1>
+<ul>
+{% for interv in object_list %}
+    <li>{{ interv.patient }} - {{ interv.uuid }} - {{ interv.date|date:'d F Y' }} - {{ interv.amount }} ,00 €</li>
+{% endfor %}
+</ul>
+{% endblock %}
