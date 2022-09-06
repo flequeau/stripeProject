@@ -1,0 +1,6 @@
+.env
+.gitignore
+.DStore
+/db.sqlite3
+/stripeProject/patients.csv
+/stripeProject/interv.csv
