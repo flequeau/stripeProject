@@ -11,8 +11,8 @@ def datagenerate(records, headers):
         for i in range(records):
             writer.writerow({
                 "patient": i,
-                "IntervDate": fake.date_between(start_date=datetime.date(2020, 8, 1),
-                                                end_date=datetime.date(2020, 9, 6)),
+                "IntervDate": fake.date_between(start_date=datetime.date(2022, 8, 1),
+                                                end_date=datetime.date(2022, 9, 6)),
                 "Dh": fake.random_int(min=75, max=500),
                 "uuid": fake.uuid4(),
             })

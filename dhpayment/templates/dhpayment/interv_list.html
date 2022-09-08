@@ -1,9 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Interventions</h1>
-<ul>
-{% for interv in object_list %}
-    <li>{{ interv.patient }} - {{ interv.uuid }} - {{ interv.date|date:'d F Y' }} - {{ interv.amount }} ,00 €</li>
-{% endfor %}
-</ul>
+    <div class="row">
+        <div class="col-8">
+            <h1>Interventions</h1>
+            <table class="table">
+                <thead>
+                <th>Patient</th>
+                <th>UUID</th>
+                <th>Date</th>
+                <th>Montant</th>
+                <th>Paiement</th>
+                </thead>
+                <tbody>
+                {% for interv in object_list %}
+                    <tr>
+                        <td>{{ interv.patient }}</td>
+                        <td>{{ interv.uuid }}</td>
+                        <td>{{ interv.date|date:'d F Y' }}</td>
+                        <td>{{ interv.amount }}€</td>
+                        <td><a href="#" class="btn btn-primary">QR</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    <div class="col-4 mt-5">
+        Emplacement QR-CODE
+    </div>
+    </div>
 {% endblock %}
