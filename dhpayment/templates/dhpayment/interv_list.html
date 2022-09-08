@@ -18,14 +18,14 @@
                         <td>{{ interv.uuid }}</td>
                         <td>{{ interv.date|date:'d F Y' }}</td>
                         <td>{{ interv.amount }}€</td>
-                        <td><a href="#" class="btn btn-primary">QR</a></td>
+                        <td><a href="{% url 'create-qrcode' interv.uuid %}" class="btn btn-primary">QR</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
     <div class="col-4 mt-5">
-        Emplacement QR-CODE
+        <div>{{ img }}</div>
     </div>
     </div>
 {% endblock %}

@@ -44,13 +44,11 @@ def create_checkout_session(request, pk):
     return redirect(session.url, code=303)
 
 
-def createQrCode(request, pk):
+def createQrCode(request, uuid):
     context = {}
-    interv = get_object_or_404(Interv, pk=pk)
+    interv = get_object_or_404(Interv, uuid=uuid)
     text = 'http://127.0.0.1:8000/card/' + interv.uuid
-    factory = qrcode.image.svg.SvgImage
-    img = qrcode.make(text, image_factory=factory, box_size=20)
-    stream = BytesIO()
-    img.save(stream)
-    context["svg"] = stream.getvalue().decode()
+    img = qrcode.make(text)
+    img.save(interv.uuid + ".png")
+    context["img"] = img
     return render(request, "dhpayment/interv_list.html", context=context)
