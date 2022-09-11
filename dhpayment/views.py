@@ -47,7 +47,6 @@ def create_checkout_session(request, pk):
 
 def createQrCode(request, uuid):
     pathqr = settings.QR_CODE
-    context = {}
     interv = get_object_or_404(Interv, uuid=uuid)
     text = 'http://127.0.0.1:8000/card/create-checkout-session/' + interv.uuid
     img = qrcode.make(text)
