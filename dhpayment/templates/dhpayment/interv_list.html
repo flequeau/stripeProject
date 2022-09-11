@@ -20,6 +20,7 @@
                         <td>{{ interv.date|date:'d F Y' }}</td>
                         <td>{{ interv.amount }}€</td>
                         <td><span class="badge text-bg-primary"
+                                  style="cursor: pointer;"
                                   hx-trigger="click"
                                   hx-post="{% url 'create-qrcode' interv.uuid %}"
                                   hx-target="#qr">QR</span>

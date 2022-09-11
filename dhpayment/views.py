@@ -55,4 +55,4 @@ def createQrCode(request, uuid):
     imgpath = str(pathqr) + "/" + imgqrcode
     img.save(imgpath)
     return HttpResponse(f'<div><img src="/static/media/qrcode/{imgqrcode}"></div>'
-                        f'<div class="text-center">{interv.patient}</div>')
+                        f'<div class="text-center">{interv.patient} {interv.amount} €</div>')
