@@ -14,6 +14,12 @@
     {% endblock %}
 </div>
 <!-- JavaScript Bundle with Popper -->
+<script src="https://unpkg.com/htmx.org@1.8.0"></script>
 <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+  <script>
+      document.body.addEventListener('htmx:configRequest', (event) => {
+        event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+      })
+    </script>
 </body>
 </html>

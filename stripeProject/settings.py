@@ -121,5 +121,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "static" / "media"
+MEDIA_ROOT = BASE_DIR / "static" / "media/"
+
+QR_CODE = MEDIA_ROOT / "qrcode/"
 STRIPE_API_KEY = env("STRIPE_API_KEY")
