@@ -7,7 +7,6 @@ from django.views.generic.list import ListView
 from dhpayment.models import Patient, Interv
 import stripe
 import qrcode
-import qrcode.image.svg
 from stripeProject import settings
 
 stripe.api_key = settings.STRIPE_API_KEY
@@ -46,12 +45,19 @@ def create_checkout_session(request, pk):
 
 
 def createQrCode(request, uuid):
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        box_size=10,
+        border=4,
+    )
     pathqr = settings.QR_CODE
     interv = get_object_or_404(Interv, uuid=uuid)
     text = 'http://127.0.0.1:8000/card/create-checkout-session/' + interv.uuid
-    img = qrcode.make(text)
+    data = qr.add_data(text)
+    img = qr.make_image(data)
     imgqrcode = interv.uuid + ".png"
     imgpath = str(pathqr) + "/" + imgqrcode
     img.save(imgpath)
-    return HttpResponse(f'<div><img src="/static/media/qrcode/{imgqrcode}"></div>'
+    return HttpResponse(f'<div class="mt-5"><img src="/static/media/qrcode/{imgqrcode}" width="300" length="300"></div>'
                         f'<div class="text-center">{interv.patient} {interv.amount} €</div>')
