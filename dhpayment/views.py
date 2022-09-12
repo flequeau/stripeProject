@@ -1,4 +1,3 @@
-import os
 from pprint import pprint
 
 from django.http import HttpResponse
@@ -6,7 +5,7 @@ from django.urls import reverse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.list import ListView
-from dhpayment.models import Patient, Interv
+from dhpayment.models import Interv
 import stripe
 import qrcode
 from stripeProject import settings
@@ -41,7 +40,7 @@ def create_checkout_session(request, uuid):
         }],
         mode='payment',
         success_url=request.build_absolute_uri(reverse('checkout-success')),
-        cancel_url='http://192.168.1.20:8000/card/cancel',
+        cancel_url='http://127.0.0.1:8000/card/cancel',
     )
 
     return redirect(session.url, code=303)
@@ -56,7 +55,7 @@ def createQrCode(request, uuid):
     )
     pathqr = settings.QR_CODE
     interv = get_object_or_404(Interv, uuid=uuid)
-    text = 'http://192.168.1.20:8000/card/create-checkout-session/' + interv.uuid
+    text = 'http://127.0.0.1:8000/card/create-checkout-session/' + interv.uuid
     data = qr.add_data(text)
     img = qr.make_image(data)
     imgqrcode = interv.uuid + ".png"
