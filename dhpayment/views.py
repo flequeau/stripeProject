@@ -11,7 +11,7 @@ import qrcode
 from stripeProject import settings
 
 stripe.api_key = settings.STRIPE_API_KEY
-endpoint_secret = 'whsec_e07780692a7d0dd2fad6bea468d4772b7cb63e62c04c512709b119151ebbdab5'
+endpoint_secret = settings.ENDPOINT_SECRET
 
 
 def index(request):
