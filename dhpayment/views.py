@@ -55,7 +55,7 @@ def createQrCode(request, uuid):
     )
     pathqr = settings.QR_CODE
     interv = get_object_or_404(Interv, uuid=uuid)
-    text = settings.SERVER_IP + '/card/create-checkout-session/' + interv.uuid
+    text = 'http://liveproject.ddns.net/card/create-checkout-session/' + interv.uuid
     data = qr.add_data(text)
     img = qr.make_image(data)
     imgqrcode = interv.uuid + ".png"
@@ -94,4 +94,12 @@ def stripe_webhook(request):
 
 
 def complete_payment(data):
-    pprint(data)
+    pprint(data['customer_details']['email'])
+
+
+def state_pay(request):
+    status = Interv.objects.all()
+    for stat in status:
+        stat.payment_state = 'ATT'
+        stat.save()
+    return render(request, 'dhpayment/interv_list.html')
