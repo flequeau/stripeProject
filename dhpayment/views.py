@@ -26,6 +26,7 @@ class IntervListView(ListView):
 def create_checkout_session(request, uuid):
     interv = get_object_or_404(Interv, uuid=uuid)
     session = stripe.checkout.Session.create(
+        client_reference_id=interv.uuid,
         customer_email=interv.patient.email,
         payment_method_types=['card'],
         line_items=[{
@@ -94,7 +95,7 @@ def stripe_webhook(request):
 
 
 def complete_payment(data):
-    pprint(data['customer_details']['email'])
+    pprint(data)
 
 
 def state_pay(request):

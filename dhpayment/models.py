@@ -1,4 +1,6 @@
-import uuid as uuid
+import random
+import string
+import uuid
 from django.db import models
 from django.urls import reverse
 
@@ -21,11 +23,14 @@ class Patient(models.Model):
         verbose_name_plural = 'Patients'
         ordering = ['name']
 
+
 STATEMENT = [
     ('ATT', 'Attente'),
     ('PAY', 'Réglé'),
     ('REL', 'Relance')
 ]
+
+
 class Interv(models.Model):
     patient = models.ForeignKey(Patient, blank=True, null=True, verbose_name="Patient", on_delete=models.CASCADE)
     date = models.DateField(blank=True, null=True, verbose_name="Date Interv.")
@@ -44,5 +49,3 @@ class Interv(models.Model):
         verbose_name = 'Intervention'
         verbose_name_plural = 'Interventions'
         ordering = ['date']
-
-
