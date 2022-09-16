@@ -43,7 +43,7 @@ class Interv(models.Model):
         return reverse('interv_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return '{} {}'.format(self.patient, self.date)
+        return '{} {} {}'.format(self.patient, self.date, self.payment_state)
 
     class Meta:
         verbose_name = 'Intervention'

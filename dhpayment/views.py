@@ -88,14 +88,13 @@ def stripe_webhook(request):
         return HttpResponse(status=400)
 
     if event['type'] == 'checkout.session.completed':
-        data = event['data']['object']
-        return complete_payment(data)
+        uuid = event['data']['object']['client_reference_id']
+        interv = get_object_or_404(Interv, uuid=uuid)
+        interv.payment_state = 'PAY'
+        interv.save()
+        return HttpResponse(status=200)
 
     return HttpResponse(status=200)
-
-
-def complete_payment(data):
-    pprint(data)
 
 
 def state_pay(request):
