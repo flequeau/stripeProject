@@ -1,0 +1,14 @@
+{% for patient in patients %}
+    <tr id="patient-{{ patient.pk }}" class="patient-row">
+        <td>{{ patient.name }}</td>
+        <td>{{ patient.forname }}</td>
+        <td>{{ patient.birthDate }}</td>
+        <td>{{ patient.phone }}</td>
+        <td>{{ patient.email }}</td>
+        <td>
+            <button class="btn btn-primary btn-sm" hx-get="{% url 'edit_patient' pk=patient.pk %}" hx-target="#dialog">
+                Voir
+            </button>
+        </td>
+    </tr>
+{% endfor %}
