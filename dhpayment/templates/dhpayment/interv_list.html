@@ -2,9 +2,13 @@
 {% load static %}
 {% block content %}
     <div class="row">
+
+    <a class="btn btn-primary" href="{% url 'search' %}" role="button">Recherche patient</a>
+
         <div class="col-8">
             <h1>Interventions</h1>
-        <a class="btn btn-danger" href="{% url 'status' %}">STATUS</a>
+
+            <button hx-get="#" hx-target='#dialog'></button>
             <table class="table">
                 <thead>
                 <th>Patient</th>
@@ -23,17 +27,20 @@
                         <td>{{ interv.date|date:'d F Y' }}</td>
                         <td>{{ interv.amount }}€</td>
                         <td><h4><span class="badge text-bg-primary"
-                                  style="cursor: pointer;"
-                                  hx-trigger="click"
-                                  hx-post="{% url 'create-qrcode' interv.uuid %}"
-                                  hx-target="#qr">QR</span>
+                                      style="cursor: pointer;"
+                                      hx-trigger="click"
+                                      hx-post="{% url 'create-qrcode' interv.uuid %}"
+                                      hx-target="#qr">QR</span>
                         </h4></td>
                         {% if interv.payment_state == 'ATT' %}
-                            <td><h4><span class="badge text-bg-warning">{{ interv.get_payment_state_display }}</span></h4></td>
-                            {% else %}
-                            <td><h4><span class="badge text-bg-success">{{ interv.get_payment_state_display }}</span></h4></td>
+                            <td><h4><span class="badge text-bg-warning">{{ interv.get_payment_state_display }}</span>
+                            </h4></td>
+                        {% else %}
+                            <td><h4><span class="badge text-bg-success">{{ interv.get_payment_state_display }}</span>
+                            </h4></td>
                         {% endif %}
-                    <td><h4><a class="badge text-bg-primary" href="{% url 'create-check-out-session' interv.uuid %}">Stripe</a></h4></td>
+                        <td><h4><a class="badge text-bg-primary"
+                                   href="{% url 'create-check-out-session' interv.uuid %}">Stripe</a></h4></td>
                     </tr>
                 {% endfor %}
                 </tbody>
